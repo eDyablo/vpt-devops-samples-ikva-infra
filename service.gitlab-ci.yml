@@ -9,3 +9,6 @@ workflow:
 
 build container image:
   extends: .build container image job
+
+promote container image:
+  extends: .promote release container image
