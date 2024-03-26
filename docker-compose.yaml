@@ -1,0 +1,24 @@
+services:
+  terminal:
+    image: dkr.gtl.net/dkr/devops-tools-helmfile-job-runner
+    volumes:
+    - .:/var/workspace:rw
+    - ~/.aws:/home/default/.aws:ro
+    - ~/.kube:/home/default/.kube:ro
+    - ~/.ssh:/opt/.ssh:ro
+    environment:
+      AWS_PROFILE: $AWS_PROFILE
+      PS1: '$${SESSION_NAME:-$${USER:-$$(uname -n)}} \w $$ '
+      SESSION_NAME: infra
+    working_dir: /var/workspace
+    command:
+    - sh
+    - -c
+    - |-
+      set -e
+      cp -r /opt/.ssh $$HOME
+      export GITLAB_TOKEN=$${GITLAB_TOKEN:-$$(ssh git@gitlab.gtl.net personal_access_token $$(uname -n) read_api 1 | head -1 | tr -s ' ' | cut -d ' ' -f2)}
+      git config --global --add safe.directory $$(pwd)
+      git_revision=$$(git rev-parse --abbrev-ref HEAD)
+      export DEPLOYMENT_NAME_SUFFIX=$${git_revision:+-$$git_revision}
+      sh
