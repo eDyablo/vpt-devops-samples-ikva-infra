@@ -21,5 +21,4 @@ promote container image:
 deploy environment:
   extends: .trigger helm chart project job
   inherit:
-    default: true
     variables: [INFRA_PROJECT_PATH]
