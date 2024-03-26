@@ -21,3 +21,4 @@ deploy environment:
   extends: .trigger helm chart project job
   variables:
     INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
+    UPSTREAM_ENVIRONMENT_TIER: other
