@@ -2,7 +2,9 @@ deploy upstream:
   rules:
   - if: $CI_PIPELINE_SOURCE == 'pipeline'
   script:
-  - echo one
-    - echo two
-  - echo three
-    - echo four
+  - &first
+    - echo first 1
+    - echo first 2
+  - &second
+    - echo second 1
+    - echo second 2
