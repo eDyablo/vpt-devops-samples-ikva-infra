@@ -13,7 +13,6 @@ deploy upstream:
   - gtl-k8s-dev
   environment:
     auto_stop_in: $UPSTREAM_ENVIRONMENT_AUTOSTOP
-    deployment_tier: $UPSTREAM_ENVIRONMENT_TIER
     name: $UPSTREAM_ENVIRONMENT_NAME
     on_stop: remove upstream
 
