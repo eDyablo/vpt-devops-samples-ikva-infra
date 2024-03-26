@@ -1,10 +1,27 @@
+include:
+- file: helmfile-jobs.yaml
+  project: devops/tools/ci
+
 deploy upstream:
+  extends: .deploy helmfile job
   rules:
-  - if: $CI_PIPELINE_SOURCE == 'pipeline'
-  script:
-  - &first
-    - echo first 1
-    - echo first 2
-  - &second
-    - echo second 1
-    - echo second 2
+  - if: >-
+      $CI_PIPELINE_SOURCE == 'pipeline'
+      && $HELMFILE_ENVIRONMENT
+      && $UPSTREAM_ENVIRONMENT_NAME
+  tags:
+  - gtl-k8s-dev
+  environment:
+    auto_stop_in: $UPSTREAM_ENVIRONMENT_AUTOSTOP
+    deployment_tier: $UPSTREAM_ENVIRONMENT_TIER
+    name: $UPSTREAM_ENVIRONMENT_NAME
+    on_stop: remove upstream
+
+remove upstream:
+  extends: .destroy helmfile job
+  needs:
+  - job: deploy upstream
+  rules: !reference [deploy upstream, rules]
+  tags: !reference [deploy upstream, tags]
+  environment:
+    name: !reference [deploy upstream, environment, name]

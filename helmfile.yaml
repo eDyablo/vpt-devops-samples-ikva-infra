@@ -1,0 +1,2 @@
+bases:
+- git::https://user:{{ env "GITLAB_TOKEN" }}@gitlab.gtl.net/devops/tools/ci.git@helmfile.yaml?ref={{ env "CI_LIBRARY_REF_NAME" | default "main" }}

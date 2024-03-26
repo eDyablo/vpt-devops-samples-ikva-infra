@@ -1,0 +1,25 @@
+repositories:
+- name: viapath
+  url: https://artifactory.gtl.net/artifactory/helm
+
+templates:
+  base:
+    name: {{ .Values.deploymentReleaseName }}
+    namespace: {{ .Values.deploymentNamespace }}
+    labels:
+      deployment: {{ .Values.deploymentBaseName }}
+    timeout: 60
+    values:
+    {{- with .Values | getOrNil .Values.deploymentBaseName }}
+    - {{- . | toYaml | trim | nindent 6 }}
+    {{- end }}
+    {{- with .Values | getOrNil "ci.annotations" }}
+    - podAnnotations:
+        {{- . | toYaml | trim | nindent 8 }}
+    {{- end }}
+    wait: true
+  ikva:
+    inherit:
+    - template: base
+    chart: viapath/ikva-service
+    version: {{ env "IKVA_CHART_VERSION" | quote }}
