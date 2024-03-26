@@ -1,0 +1,11 @@
+include:
+- file: container-helmfile-jobs.gitlab-ci.yml
+  project: devops/tools/ci
+
+workflow:
+  rules:
+  - !reference [.container helmfile jobs, workflow rules]
+  - when: always
+
+build container image:
+  extends: .build container image job
