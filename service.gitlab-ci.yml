@@ -2,6 +2,10 @@ include:
 - file: container-helmfile-jobs.gitlab-ci.yml
   project: devops/tools/ci
 
+variables:
+  CONTAINER_IMAGE_BASE_NAME: ikva-service
+  HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
+
 workflow:
   rules:
   - !reference [.container helmfile jobs, workflow rules]
@@ -12,3 +16,6 @@ build container image:
 
 promote container image:
   extends: .promote release container image job
+
+deploy environment:
+  extends: .trigger helm chart project job
