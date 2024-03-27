@@ -1,4 +1,0 @@
-ikva:
-  service:
-    livenessProbe:
-      timeoutSeconds: 3
