@@ -1,29 +1,15 @@
+bases:
+- git::https://user:{{ env "GITLAB_TOKEN" }}@gitlab.gtl.net/devops/tools/ci.git@helmfile/templates.yaml?ref={{ env "CI_LIBRARY_REF_NAME" | default "main" }}
+
 repositories:
 - name: viapath
   url: https://artifactory.gtl.net/artifactory/helm
 
 templates:
-  base:
-    name: {{ .Values.deploymentReleaseName }}
-    namespace: {{ .Values.deploymentNamespace }}
-    labels:
-      deployment: {{ .Values.deploymentBaseName }}
-    timeout: 60
-    values:
-    {{- with .Values | getOrNil "image.registry" }}
-    - image:
-        registry: {{ . }}
-    {{- end }}
-    {{- with .Values | getOrNil "ci.annotations" }}
-    - podAnnotations:
-        {{- . | toYaml | trim | nindent 8 }}
-    {{- end }}
-    {{- with .Values | getOrNil .Values.deploymentBaseName }}
-    - {{- . | toYaml | trim | nindent 6 }}
-    {{- end }}
-    wait: true
   ikva:
+    chart: viapath/ikva-service
     inherit:
     - template: base
-    chart: viapath/ikva-service
+    timeout: 60
     version: {{ env "IKVA_CHART_VERSION" | quote }}
+    wait: true
