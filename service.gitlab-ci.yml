@@ -1,6 +1,8 @@
-include:
-- file: service-k8s-infra-jobs.gitlab-ci.yml
-  project: devops/tools/ci
+variables:
+  one:
+    description: one
+  two:
+    description: two
 
 # include:
 # - file: container-helmfile-jobs.gitlab-ci.yml
