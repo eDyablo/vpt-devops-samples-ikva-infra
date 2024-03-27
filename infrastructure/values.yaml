@@ -1,4 +1,6 @@
 ikva:
+  image:
+    pullPolicy: Always
   service:
     livenessProbe:
       timeoutSeconds: 5
