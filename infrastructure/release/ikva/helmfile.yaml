@@ -1,5 +1,0 @@
-{{- tpl (readFile "../../helmfile.yaml") $ -}}
-
-releases:
-- inherit:
-  - template: ikva
