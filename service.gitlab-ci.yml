@@ -14,6 +14,11 @@ variables:
 
 build container image:
   extends: .build container image job
+  rules:
+  - if: $PIPELINE_ACTION && $PIPELINE_ACTION == $PIPELINE_ACTION_DEPLOY_RELEASE_TO_PRODUCTION
+    when: never
+  - changes:
+    - Dockerfile
   variables:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
