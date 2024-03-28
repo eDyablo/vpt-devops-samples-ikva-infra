@@ -19,6 +19,8 @@ build container image:
     when: never
   - changes:
     - Dockerfile
+  tags:
+  - gtl-k8s-dev
   variables:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
