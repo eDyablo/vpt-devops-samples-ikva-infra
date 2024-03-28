@@ -33,5 +33,3 @@ promote container image:
 
 deploy environment:
   extends: .trigger helm chart project job
-  variables:
-    HELM_CHART_APP_VERSION: $CONTAINER_IMAGE_TAG
