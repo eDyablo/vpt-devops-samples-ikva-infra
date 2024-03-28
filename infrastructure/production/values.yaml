@@ -1,0 +1,3 @@
+deploymentNamespace: prod
+image:
+  registry: dkr.gtl.net/dkr-production
