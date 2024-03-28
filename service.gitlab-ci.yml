@@ -11,6 +11,10 @@ variables:
   CONTAINER_IMAGE_BASE_NAME: ikva-service
   HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
+  JIRA_TICKET:
+    options:
+    - DEPX-000
+    value: DEPX-000
 
 build container image:
   extends: .build container image job
