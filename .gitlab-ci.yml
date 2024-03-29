@@ -2,6 +2,9 @@ include:
 - file: helmfile-jobs.yaml
   project: devops/tools/ci
 
+variables:
+  JOB_RUNNER_TAG_DEPLOYMENT: gtl-k8s-dev
+
 deploy upstream:
   extends: .deploy helmfile job
   rules:
@@ -10,7 +13,7 @@ deploy upstream:
       && $HELMFILE_ENVIRONMENT
       && $UPSTREAM_ENVIRONMENT_NAME
   tags:
-  - gtl-k8s-dev
+  - $JOB_RUNNER_TAG_DEPLOYMENT
   environment:
     auto_stop_in: $UPSTREAM_ENVIRONMENT_AUTOSTOP
     name: $UPSTREAM_ENVIRONMENT_NAME
