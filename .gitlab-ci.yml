@@ -1,9 +1,14 @@
 include:
-- file: helmfile-jobs.yaml
+- file: helmfile-infra-pipeline.gitlab-ci.yml
   project: devops/tools/ci
 
-variables:
-  JOB_RUNNER_TAG_DEPLOYMENT: gtl-k8s-dev-test
+workflow:
+  rules:
+  - if: $HELMFILE_ENVIRONMENT == $ENVIRONMENT_NAME_PRODUCTION
+    variables:
+      JOB_RUNNER_TAG_DEPLOYMENT: production
+  - variables:
+      JOB_RUNNER_TAG_DEPLOYMENT: gtl-k8s-dev
 
 deploy upstream:
   extends: .deploy helmfile job
