@@ -7,15 +7,14 @@ variables:
   HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
 
-build container image:
-  extends: .build container image job
-  rules:
-  - if: $PIPELINE_ACTION && $PIPELINE_ACTION == $PIPELINE_ACTION_DEPLOY_RELEASE_TO_PRODUCTION
-    when: never
-  - changes:
-    - Dockerfile
-  tags:
-  - gtl-k8s-dev
-  variables:
-    CONTAINER_IMAGE_BUILD_ARGS: |-
-      DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
+# build container image:
+#   extends: .build container image job
+#   rules:
+#   - !reference [.build container image job, rulse]
+#   - changes:
+#     - Dockerfile
+#   tags:
+#   - gtl-k8s-dev
+#   variables:
+#     CONTAINER_IMAGE_BUILD_ARGS: |-
+#       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
