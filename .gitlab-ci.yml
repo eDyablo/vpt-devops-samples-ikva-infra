@@ -3,5 +3,4 @@ include:
   project: devops/tools/ci
 
 variables:
-  JOB_RUNNER_TAG_DEPLOYMENT_DEFAULT: default
   JOB_RUNNER_TAG_DEPLOYMENT_PRODUCTION: gtl-k8s-dev
