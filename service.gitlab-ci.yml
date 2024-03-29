@@ -6,15 +6,17 @@ variables:
   CONTAINER_IMAGE_BASE_NAME: ikva-service
   HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
+  PIPELINE_CUSTOM_JOBS: |-
+    build container image
 
-# build container image:
-#   extends: .build container image job
-#   rules:
-#   - !reference [.build container image job, rulse]
-#   - changes:
-#     - Dockerfile
-#   tags:
-#   - gtl-k8s-dev
-#   variables:
-#     CONTAINER_IMAGE_BUILD_ARGS: |-
-#       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
+BUILD:
+  extends: .build container image job
+  rules:
+  - !reference [.build container image job, rulse]
+  - changes:
+    - Dockerfile
+  tags:
+  - gtl-k8s-dev
+  variables:
+    CONTAINER_IMAGE_BUILD_ARGS: |-
+      DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
