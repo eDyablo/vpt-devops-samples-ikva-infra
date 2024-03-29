@@ -6,9 +6,6 @@ variables:
   CONTAINER_IMAGE_BASE_NAME: ikva-service
   HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
-  PIPELINE_CUSTOM_JOBS: |-
-    deploy environment
-    promote container image
 
 build container image:
   extends: .build container image job
@@ -22,9 +19,3 @@ build container image:
   variables:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
-
-PROMOTE:
-  extends: .promote container image job
-
-DEPLOY:
-  extends: .deploy environment job
