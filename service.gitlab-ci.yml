@@ -24,3 +24,6 @@ build container image:
 
 promote container image:
   extends: .promote release container image job
+
+DEPLOY:
+  extends: .deploy environment job
