@@ -1,5 +1,5 @@
 include:
-- file: helmfile-infra-pipeline.gitlab-ci.yml
+- file: helmfile-infra/infra-pipeline.gitlab-ci.yml
   project: devops/tools/ci
 
 variables:
