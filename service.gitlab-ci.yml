@@ -7,11 +7,6 @@ variables:
   HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
 
-workflow:
-  rules:
-  - !reference [.container helmfile jobs, workflow rules]
-  - when: always
-
 build container image:
   extends: .build container image job
   rules:
