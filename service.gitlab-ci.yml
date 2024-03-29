@@ -12,7 +12,7 @@ variables:
 BUILD:
   extends: .build container image job
   rules:
-  - !reference [.build container image job, rulse]
+  - !reference [.build container image job, rules]
   - changes:
     - Dockerfile
   tags:
