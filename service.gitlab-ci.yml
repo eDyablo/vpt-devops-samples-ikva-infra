@@ -8,6 +8,7 @@ variables:
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
   PIPELINE_CUSTOM_JOBS: |-
     deploy environment
+    promote container image
 
 build container image:
   extends: .build container image job
@@ -22,8 +23,8 @@ build container image:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
 
-promote container image:
-  extends: .promote release container image job
+PROMOTE:
+  extends: .promote container image job
 
 DEPLOY:
   extends: .deploy environment job
