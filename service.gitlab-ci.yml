@@ -22,6 +22,3 @@ build container image:
 
 promote container image:
   extends: .promote release container image job
-
-deploy environment:
-  extends: .trigger helm chart project job
