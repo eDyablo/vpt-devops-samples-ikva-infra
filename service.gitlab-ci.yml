@@ -1,5 +1,5 @@
 include:
-- file: container-helmfile-jobs.gitlab-ci.yml
+- file: helmfile-infra/service-pipeline.gitlab-ci.yml
   project: devops/tools/ci
 
 variables:
