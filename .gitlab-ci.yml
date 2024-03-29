@@ -1,3 +1,6 @@
 include:
 - file: helmfile-infra-pipeline.gitlab-ci.yml
   project: devops/tools/ci
+
+variables:
+  JOB_RUNNER_TAG_DEPLOYMENT_DEFAULT: default
