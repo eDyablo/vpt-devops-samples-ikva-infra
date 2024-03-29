@@ -6,10 +6,8 @@ variables:
   CONTAINER_IMAGE_BASE_NAME: ikva-service
   HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
-  PIPELINE_CUSTOM_JOBS: |-
-    build container image
 
-BUILD:
+build container image:
   extends: .build container image job
   rules:
   - !reference [.build container image job, rules]
