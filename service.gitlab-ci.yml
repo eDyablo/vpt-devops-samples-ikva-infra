@@ -18,7 +18,3 @@ build container image:
   variables:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
-
-deploy environment:
-  variables:
-    HELM_CHART_VERSION: '@{HELM_CHART_SOURCE_VERSION}-${CI_PROJECT_PATH_SLUG}-$${HELM_CHART_APP_VERSION}'
