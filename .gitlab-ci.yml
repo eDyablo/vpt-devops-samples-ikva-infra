@@ -12,7 +12,6 @@ production gateway:
       && $PIPELINE_ACTION == $PIPELINE_ACTION_DEPLOY_RELEASE_TO_PRODUCTION
       && $JIRA_TICKET =~ $PRODUCTION_JIRA_TICKET_PATTERN
   stage: .pre
-  rules: !reference [deploy to production, rules]
   trigger:
     project: devops-private/production-deployment-gate
     strategy: depend
