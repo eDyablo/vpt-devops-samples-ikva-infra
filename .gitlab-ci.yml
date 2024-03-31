@@ -4,3 +4,17 @@ include:
 
 variables:
   JOB_RUNNER_TAG_DEPLOYMENT_PRODUCTION: gtl-k8s-dev
+
+production gateway:
+  rules:
+  - if: >-
+      $PIPELINE_ACTION
+      && $PIPELINE_ACTION == $PIPELINE_ACTION_DEPLOY_RELEASE_TO_PRODUCTION
+      && $JIRA_TICKET =~ $PRODUCTION_JIRA_TICKET_PATTERN
+  stage: .pre
+  rules: !reference [deploy to production, rules]
+  trigger:
+    project: devops-private/production-deployment-gate
+    strategy: depend
+  variables:
+    JIRA_TICKET: $JIRA_TICKET
