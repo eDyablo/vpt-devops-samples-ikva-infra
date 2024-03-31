@@ -18,16 +18,3 @@ build container image:
   variables:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
-
-production gateway:
-  rules:
-  - if: >-
-      $PIPELINE_ACTION
-      && $PIPELINE_ACTION == $PIPELINE_ACTION_DEPLOY_RELEASE_TO_PRODUCTION
-      && $JIRA_TICKET =~ $JIRA_TICKET_PRODUCTION_PATTERN
-  stage: .pre
-  trigger:
-    project: devops-private/production-deployment-gate
-    strategy: depend
-  variables:
-    JIRA_TICKET: $JIRA_TICKET
