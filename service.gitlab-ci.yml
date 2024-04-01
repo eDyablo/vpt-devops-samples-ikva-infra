@@ -45,17 +45,17 @@ merge request:
       )
   - # Create merge request if not exists yet
     - if [ -z "$MERGE_REQUEST_IDS" ]; then
-      - |-
-        CURL_DATA="{
-        \"project_id\": ${CI_PROJECT_ID},
-        \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
-        \"target_branch\": \"${CI_DEFAULT_BRANCH}\"
-        }"
-      - >-
-        curl
-        --data "$CURL_DATA"
-        --header "Content-Type: application/json"
-        --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
-        --request POST
-        --silent
+    - |-
+      CURL_DATA="{
+      \"project_id\": \"${CI_PROJECT_ID}\",
+      \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
+      \"target_branch\": \"${CI_DEFAULT_BRANCH}\"
+      }"
+    - >-
+      curl
+      --data "$CURL_DATA"
+      --header "Content-Type: application/json"
+      --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
+      --request POST
+      --silent
     - fi
