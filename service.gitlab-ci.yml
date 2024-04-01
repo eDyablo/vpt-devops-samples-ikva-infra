@@ -27,7 +27,7 @@ merge request:
   stage: .pre
   image: ${ARTIFACTORY_URL}/dkr/devops-tools-plain-job-runner
   script:
-  -
+  - # Get merge requests
     - >-
       JQ_EXPRESSION=$(echo "
       .[]
@@ -36,8 +36,27 @@ merge request:
       | .id
       ")
     - >-
+      MERGE_REQUEST_IDS=$(
       curl
       --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
       --silent
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
       | jq -r "$JQ_EXPRESSION"
+      )
+  - # Create merge request if not exists yet
+    - if [ -z "$MERGE_REQUEST_IDS" ]; then
+    - |-
+      CURL_DATA="{
+      \"project_id\": ${CI_PROJECT_ID},
+      \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
+      \"target_branch\": \"${CI_DEFAULT_BRANCH}\"
+      }"
+    - >-
+      echo
+      curl
+      --data "$CURL_DATA"
+      --header "Content-Type: application/json"
+      --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
+      --request POST
+      --silent
+    - fi
