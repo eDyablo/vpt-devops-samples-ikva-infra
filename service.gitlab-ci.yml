@@ -20,14 +20,15 @@ build container image:
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
 
 merge request:
+  rules:
+  - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+    when: never
   stage: .pre
   image: ${ARTIFACTORY_URL}/dkr/devops-tools-plain-job-runner
   script:
-  #- echo ${TOKEN_NAME:=$(echo ${GITLAB_USER_LOGIN}_COMMIT_TOKEN | tr '[:lower:]' '[:upper:]')}
-  #- echo ${PRIVATE_TOKEN:=$(echo ${!TOKEN_NAME})}
   - >-
     curl
     --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
     --silent
     ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
-    | jq
+    | jq -r ".[] | select(.source_branch==\"${CI_COMMIT_REF_NAME}\" and .target_branch=\"${CI_DEFAULT_BRANCH}\")"
