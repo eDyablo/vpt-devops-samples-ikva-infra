@@ -30,3 +30,4 @@ merge request:
     --header "PRIVATE-TOKEN:${CI_JOB_TOKEN}"
     --silent
     ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
+    | jq
