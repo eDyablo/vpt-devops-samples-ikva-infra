@@ -27,7 +27,7 @@ merge request:
   #- echo ${PRIVATE_TOKEN:=$(echo ${!TOKEN_NAME})}
   - >-
     curl
-    --header "PRIVATE-TOKEN:${CI_JOB_TOKEN}"
+    --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
     --silent
     ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
     | jq
