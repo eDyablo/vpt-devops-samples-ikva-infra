@@ -26,4 +26,5 @@ merge request:
   - >-
     curl
     --form "token=${CI_JOB_TOKEN}"
-    ${CI_API_V4_URL}/projects/merge_requests?state=opened
+    --silent
+    ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
