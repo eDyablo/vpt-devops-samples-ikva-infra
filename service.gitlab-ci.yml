@@ -49,9 +49,9 @@ merge request:
       CURL_DATA="{
       \"assignees\": [
         \"id\": ${CITLAB_USER_ID},
-        \"name\": \"${GITLAB_USER_NAME\",
+        \"name\": \"${GITLAB_USER_NAME}\",
         \"username\": \"${GITLAB_USER_LOGIN}\"
-      ]
+      ],
       \"project_id\": ${CI_PROJECT_ID},
       \"remove_source_branch\": true,
       \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
