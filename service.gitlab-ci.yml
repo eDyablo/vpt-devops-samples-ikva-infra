@@ -35,7 +35,7 @@ merge request:
       and .target_branch==\"${CI_DEFAULT_BRANCH}\")
       | .id
       ")
-    - >-
+    - >- # https://curl.se/docs/manpage.html
       MERGE_REQUEST_IDS=$(
       curl
       --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
@@ -47,14 +47,19 @@ merge request:
     - if [ -z "$MERGE_REQUEST_IDS" ]; then
     - |-
       CURL_DATA="{
+      \"assignees\": [
+        \"id\": ${CITLAB_USER_ID},
+        \"name\": \"${GITLAB_USER_NAME\",
+        \"username\": \"${GITLAB_USER_LOGIN}\"
+      ]
       \"project_id\": ${CI_PROJECT_ID},
       \"remove_source_branch\": true,
       \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
-      \"squash_commits\": true,
+      \"squash\": true,
       \"target_branch\": \"${CI_DEFAULT_BRANCH}\",
       \"title\": \"merge ${CI_COMMIT_REF_NAME} to ${CI_DEFAULT_BRANCH}\"
       }"
-    - >-
+    - >- # https://curl.se/docs/manpage.html
       curl
       --data "$CURL_DATA"
       --fail-with-body
