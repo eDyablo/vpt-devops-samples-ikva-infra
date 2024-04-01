@@ -27,9 +27,16 @@ merge request:
   stage: .pre
   image: ${ARTIFACTORY_URL}/dkr/devops-tools-plain-job-runner
   script:
-  - >-
-    curl
-    --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
-    --silent
-    ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
-    | jq -r ".[] | select(.source_branch==\"${CI_COMMIT_REF_NAME}\" and .target_branch=\"${CI_DEFAULT_BRANCH}\")"
+  -
+    - >-
+      JQ_EXPRESSION=$(echo "
+      .[]
+      | select(.source_branch==\"${CI_COMMIT_REF_NAME}\" and .target_branch=\"${CI_DEFAULT_BRANCH}\"
+      | .title
+      ")
+    - >-
+      curl
+      --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
+      --silent
+      ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
+      | jq -r "$JQ_EXPRESSION"
