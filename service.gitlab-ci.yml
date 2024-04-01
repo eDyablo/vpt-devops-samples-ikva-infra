@@ -47,8 +47,10 @@ merge request:
     - if [ -z "$MERGE_REQUEST_IDS" ]; then
     - |-
       CURL_DATA="{
-      \"project_id\": \"${CI_PROJECT_ID}\",
+      \"project_id\": ${CI_PROJECT_ID},
+      \"remove_source_branch\": true,
       \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
+      \"squash_commits\": true,
       \"target_branch\": \"${CI_DEFAULT_BRANCH}\",
       \"title\": \"merge ${CI_COMMIT_REF_NAME} to ${CI_DEFAULT_BRANCH}\"
       }"
