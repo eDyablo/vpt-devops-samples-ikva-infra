@@ -23,6 +23,7 @@ merge request:
   stage: .pre
   image: ${ARTIFACTORY_URL}/dkr/devops-tools-plain-job-runner
   script:
+  - env
   - echo ${TOKEN_NAME:=$(echo ${GITLAB_USER_LOGIN}_COMMIT_TOKEN | tr '[:lower:]' '[:upper:]')}
   - echo ${PRIVATE_TOKEN:=$(echo ${!TOKEN_NAME})}
   - >-
