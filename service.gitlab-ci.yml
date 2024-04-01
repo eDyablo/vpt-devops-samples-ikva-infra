@@ -47,11 +47,8 @@ merge request:
     - if [ -z "$MERGE_REQUEST_IDS" ]; then
     - |- # https://www.json.org
       CURL_DATA="{
-      \"assignees\": [
-        \"id\": ${CITLAB_USER_ID},
-        \"name\": \"${GITLAB_USER_NAME}\",
-        \"username\": \"${GITLAB_USER_LOGIN}\"
-      ],
+      \"allow_collaboration\", false,
+      \"assignee_id\": ${CITLAB_USER_ID},
       \"project_id\": ${CI_PROJECT_ID},
       \"remove_source_branch\": true,
       \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
