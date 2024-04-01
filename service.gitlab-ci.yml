@@ -29,22 +29,23 @@ merge request:
   script:
   - # Get merge requests
     - >-
-      JQ_EXPRESSION=$(echo "
+      MERGE_REQUEST_URL_QUERY=$(echo "
       .[]
       | select(.source_branch==\"${CI_COMMIT_REF_NAME}\"
       and .target_branch==\"${CI_DEFAULT_BRANCH}\")
-      | .id
+      | .web_url
       ")
     - >- # https://curl.se/docs/manpage.html
-      MERGE_REQUEST_IDS=$(
+      MERGE_REQUEST_URLS=$(
       curl
+      --fail-with-body
       --header "PRIVATE-TOKEN:${GITLAB_TOKEN}"
       --silent
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests?state=opened
-      | jq -r "$JQ_EXPRESSION"
+      | jq -r "$MERGE_REQUEST_URL_QUERY"
       )
   - # Create merge request if not exists yet
-    - if [ -z "$MERGE_REQUEST_IDS" ]; then
+    - if [ -z "$MERGE_REQUEST_URLS" ]; then
     - |- # https://www.json.org
       CURL_DATA="{
       \"project_id\": ${CI_PROJECT_ID},
@@ -63,4 +64,7 @@ merge request:
       --request POST
       --silent
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests
+      | jq -r '.web_url'
+    - else
+    - echo "$MERGE_REQUEST_URLS"
     - fi
