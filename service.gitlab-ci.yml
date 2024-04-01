@@ -48,6 +48,7 @@ merge request:
     - if [ -z "$MERGE_REQUEST_URLS" ]; then
     - |- # https://www.json.org
       CURL_DATA="{
+      \"assignee_ids\": [${GITLAB_USER_ID}],
       \"project_id\": ${CI_PROJECT_ID},
       \"remove_source_branch\": true,
       \"source_branch\": \"${CI_COMMIT_REF_NAME}\",
