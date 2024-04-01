@@ -31,7 +31,8 @@ merge request:
     - >-
       JQ_EXPRESSION=$(echo "
       .[]
-      | select(.source_branch==\"${CI_COMMIT_REF_NAME}\" and .target_branch=\"${CI_DEFAULT_BRANCH}\"
+      | select(.source_branch==\"${CI_COMMIT_REF_NAME}\"
+      and .target_branch=\"${CI_DEFAULT_BRANCH}\")
       | .title
       ")
     - >-
