@@ -23,6 +23,7 @@ merge request:
   rules:
   - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
     when: never
+  - when: on_success
   stage: .pre
   image: ${ARTIFACTORY_URL}/dkr/devops-tools-plain-job-runner
   script:
