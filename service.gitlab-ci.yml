@@ -18,3 +18,12 @@ build container image:
   variables:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
+
+merge request:
+  stage: .pre
+  image: ${ARTIFACTORY_URL}/dkr/devops-tools-plain-job-runner
+  script:
+  - >-
+    curl
+    --form "token=${CI_JOB_TOKEN}"
+    ${CI_API_V4_URL}/projects/merge_requests?state=opened
