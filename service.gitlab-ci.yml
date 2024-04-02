@@ -19,7 +19,7 @@ build container image:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
 
-issue release:
+publish release:
   stage: .pre
   trigger:
     include:
