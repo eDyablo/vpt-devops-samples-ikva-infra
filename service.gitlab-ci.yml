@@ -18,3 +18,10 @@ build container image:
   variables:
     CONTAINER_IMAGE_BUILD_ARGS: |-
       DOCKER_REGISTRY=${ARTIFACTORY_URL}/dkr
+
+issue release:
+  stage: .pre
+  trigger:
+    include:
+    - file: gitlab/release-pipeline.gitlab-ci.yml
+      project: devops/tools/ci
