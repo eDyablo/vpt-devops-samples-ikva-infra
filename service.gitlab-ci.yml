@@ -8,7 +8,6 @@ variables:
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
 
 build container image:
-  extends: .build container image job
   rules:
   - !reference [.build container image job, rules]
   - changes:
