@@ -9,11 +9,6 @@ variables:
 
 build container image:
   rules:
-  - when: never
-
-BUILD:
-  extends: .build container image job
-  rules:
   - !reference [.build container image job, rules]
   - changes:
     - Dockerfile
