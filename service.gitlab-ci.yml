@@ -9,7 +9,7 @@ variables:
 
 build container image:
   rules:
-  - !reference [.build container image job, rules]
+  - !reference [.build container image, rules]
   - changes:
     - Dockerfile
   tags:
