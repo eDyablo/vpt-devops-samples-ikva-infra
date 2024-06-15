@@ -1,6 +1,7 @@
 include:
 - file: helmfile-infra/infra-pipeline.gitlab-ci.yml
   project: devops/tools/ci
+  ref: $CI_LIBRARY_REF_NAME
 
 variables:
   JOB_RUNNER_TAG_DEPLOYMENT_PRODUCTION: gtl-k8s-dev
