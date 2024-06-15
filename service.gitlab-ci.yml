@@ -6,6 +6,7 @@ variables:
   CONTAINER_IMAGE_BASE_NAME: ikva-service
   HELM_CHART_PROJECT_PATH: devops/samples/ikva/ikva-helmchart
   INFRA_PROJECT_PATH: devops/samples/ikva/ikva-infra
+  INFRA_SELECT_DEPLOYMENT: ikva
 
 build container image:
   rules:
