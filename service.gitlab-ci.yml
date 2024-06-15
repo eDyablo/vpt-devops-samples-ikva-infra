@@ -1,6 +1,7 @@
 include:
 - file: helmfile-infra/service-pipeline.gitlab-ci.yml
   project: devops/tools/ci
+  ref: $CI_LIBRARY_REF_NAME
 
 variables:
   CONTAINER_IMAGE_BASE_NAME: ikva-service
